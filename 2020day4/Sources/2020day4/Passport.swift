@@ -15,4 +15,12 @@ struct Passport {
       })
     }
   }
+
+  var isValid: Bool {
+    Field.requiredFields.reduce(true) { (acc, next) -> Bool in
+      acc && fieldDictionary.contains(where: { (key: Field, value: String) -> Bool in
+        key.rawValue == next.rawValue && key.isValid(value)
+      })
+    }
+  }
 }
